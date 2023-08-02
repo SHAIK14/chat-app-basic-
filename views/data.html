@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>data</title>
+  </head>
+  <body>
+    <form onsubmit="sendMessage(event);" action="/" method="post">
+      <input type="text" id="data" name="data" placeholder="message" />
+      <button type="submit">send</button>
+    </form>
+
+    <div id="chatbox"></div>
+
+    <script>
+      function sendMessage(event) {
+        event.preventDefault(); // Prevent the default form submission
+
+        const message = document.getElementById("data").value;
+        const username = localStorage.getItem("username");
+        const formattedMessage = `${username}: ${message}`;
+        displayMessage(formattedMessage);
+        document.getElementById("data").value = "";
+      }
+
+      function displayMessage(message) {
+        const chatbox = document.getElementById("chatbox");
+        const messageElement = document.createElement("div");
+        messageElement.textContent = message;
+        chatbox.appendChild(messageElement);
+      }
+    </script>
+  </body>
+</html>
